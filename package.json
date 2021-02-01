@@ -1,0 +1,11 @@
+{
+  "name": "codeisland",
+  "version": "1.0.0",
+  "description": "social media site for devs in all tech fields.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Landon McKell",
+  "license": "MIT"
+}
