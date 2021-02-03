@@ -17,7 +17,7 @@ const Carousel = ({ spacing }) => {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="http://placehold.it/700x400"
+            src="http://placehold.it/800x300"
             className="d-block w-100"
             alt="..."
           />
@@ -30,7 +30,7 @@ const Carousel = ({ spacing }) => {
         </div>
         <div className="carousel-item">
           <img
-            src="http://placehold.it/700x400"
+            src="http://placehold.it/800x300"
             className="d-block w-100"
             alt="..."
           />
@@ -42,7 +42,7 @@ const Carousel = ({ spacing }) => {
         </div>
         <div className="carousel-item">
           <img
-            src="http://placehold.it/700x400"
+            src="http://placehold.it/800x300"
             className="d-block w-100"
             alt="..."
           />
