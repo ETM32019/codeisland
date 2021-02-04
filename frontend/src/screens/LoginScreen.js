@@ -1,5 +1,31 @@
 import { Link } from "react-router-dom";
-const LoginScreen = () => {
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../actions/userActions";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+
+const LoginScreen = ({ location, history }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [userInfo, history, redirect]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
   return (
     <>
       {/* Big Banner Section */}
@@ -14,8 +40,10 @@ const LoginScreen = () => {
           <div className="row">
             <div className="col-md-6 offset-md-3">
               <div className="card">
+                {loading && <Loader />}
+                {error && <Message variant="danger">{error}</Message>}
                 <div className="card-body">
-                  <form>
+                  <form onSubmit={submitHandler}>
                     <div className="form-group">
                       <label htmlFor="emailTextInput">Email</label>
                       <input
@@ -24,6 +52,8 @@ const LoginScreen = () => {
                         placeholder="Email..."
                         aria-label="Firstname"
                         id="emailTextInput"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="form-group">
@@ -34,6 +64,8 @@ const LoginScreen = () => {
                         placeholder="Password..."
                         aria-label="Lastname"
                         id="passwordTextInput"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <button

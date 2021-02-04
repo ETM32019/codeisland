@@ -66,7 +66,7 @@ const RegisterScreen = () => {
                     </button>
                   </form>
                   <p className="pt-3">
-                    Have an account? <Link to="/register">Sign in</Link>{" "}
+                    Have an account? <Link to="/login">Sign in</Link>{" "}
                     here!
                   </p>
                 </div>
