@@ -8,10 +8,10 @@ const HomeScreen = () => {
         <HeroSlider />
       </header>
       {/* Page Content Section */}
-      <section class="py-5">
-        <div class="container">
-          <h1 class="font-weight-light">Half Page Image Slider</h1>
-          <p class="lead">
+      <section className="py-5">
+        <div className="container">
+          <h1 className="font-weight-light">Half Page Image Slider</h1>
+          <p className="lead">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
             auctor ante vitae augue porttitor, rhoncus ultrices sem facilisis.
             Curabitur rhoncus ante purus, euismod bibendum libero hendrerit at.
