@@ -2,7 +2,7 @@ main {
   min-height: 90vh;
 }
 
-/* Hero Slider - Start */
+/* Hero Slider Component - Start */
 .carousel-item {
   height: 65vh;
   min-height: 350px;
@@ -12,4 +12,12 @@ main {
   -o-background-size: cover;
   background-size: cover;
 }
-/* Hero Slider - End */
+/* Hero Slider Component - End */
+
+/* Profile Screen - Start */
+.jumbotron-heading {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+/* Profile Screen - End */

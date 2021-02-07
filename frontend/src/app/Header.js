@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/userActions";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
@@ -25,11 +35,26 @@ const Header = () => {
               Home
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
-          </li>
+          {userInfo ? (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/profile">
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/" onClick={logoutHandler}>
+                  Logout
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
