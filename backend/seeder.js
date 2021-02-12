@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import users from "./tempdata/users.js";
-import Profile from "./models/profileModel.js";
 import User from "./models/userModel.js";
 import Post from "./models/postModel.js";
 import connectDB from "./config/db.js";
@@ -10,9 +9,10 @@ connectDB();
 
 const importData = async () => {
   try {
-    await Profile.deleteMany();
+    // clear current users
     await User.deleteMany();
 
+    // insert users from users.js
     await User.insertMany(users);
 
     // Success Message
@@ -28,7 +28,6 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    await Profile.deleteMany();
     await User.deleteMany();
     await Post.deleteMany();
 

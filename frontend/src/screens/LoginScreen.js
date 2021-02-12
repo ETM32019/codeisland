@@ -59,7 +59,7 @@ const LoginScreen = ({ location, history }) => {
                     <div className="form-group">
                       <label htmlFor="passwordTextInput">Password</label>
                       <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         placeholder="Password..."
                         aria-label="Lastname"

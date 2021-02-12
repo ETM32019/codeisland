@@ -16,6 +16,12 @@ const authUser = asyncHandler(async (req, res) => {
       lastname: user.lastname,
       email: user.email,
       idAdmin: user.isAdmin,
+      company: user.company,
+      website: user.website,
+      bio: user.bio,
+      skill: user.skills,
+      experience: user.experience,
+      education: user.education,
       token: generateToken(user._id),
     });
   } else {
@@ -43,7 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
   });
 
-
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -53,10 +58,26 @@ const registerUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
+
+    res.status(201).json(createdProfile);
   } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
 });
 
-export { authUser, registerUser };
+//@desc     Get user profile by id
+//@route    POST /api/users/:id
+//@access   Public
+const getUserProfileById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found!");
+  }
+});
+
+export { authUser, registerUser, getUserProfileById };

@@ -38,7 +38,7 @@ const Header = () => {
           {userInfo ? (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/profile">
+                <Link className="nav-link" to={`/profile/${userInfo._id}`}>
                   Profile
                 </Link>
               </li>
