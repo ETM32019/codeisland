@@ -8,12 +8,20 @@ const postSchema = mongoose.Schema(
       ref: "User",
     },
     title: {
-        type: String
+      type: String,
     },
     subtitle: {
-        type: String
+      type: String,
     },
-
+    img: {
+      type: String,
+    },
+    postdescription: {
+      type: String,
+    },
+    body: {
+      type: String,
+    },
     avatar: {
       type: String,
     },
@@ -55,6 +63,6 @@ const postSchema = mongoose.Schema(
   }
 );
 
-const Post = mongoose.model("Post", postSchema)
+const Post = mongoose.model("Post", postSchema);
 
-export default Post
+export default Post;

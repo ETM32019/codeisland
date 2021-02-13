@@ -48,6 +48,13 @@ const userSchema = mongoose.Schema({
   skills: {
     type: [String],
   },
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Post",
+    },
+  ],
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -72,6 +79,7 @@ const userSchema = mongoose.Schema({
       },
       location: {
         type: String,
+        required: true,
       },
       from: {
         type: Date,
@@ -103,6 +111,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
       },
+      location: {
+        type: String,
+        required: true,
+      },
       from: {
         type: Date,
         required: true,
@@ -115,6 +127,16 @@ const userSchema = mongoose.Schema({
         default: false,
       },
       description: {
+        type: String,
+      },
+    },
+  ],
+  socialmedia: [
+    {
+      website: {
+        type: String,
+      },
+      link: {
         type: String,
       },
     },

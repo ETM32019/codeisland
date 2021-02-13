@@ -12,6 +12,10 @@ const users = [
     website: "http://landonmckelldevportfolio.herokuapp.com/",
     bio: "I am a bio",
     skills: ["html", "css", "javascript"],
+    socialmedia: [
+      { website: "youtube", link: "www.youtube.com" },
+      { website: "twitter", link: "www.twitter.com" },
+    ],
   },
 ];
 
