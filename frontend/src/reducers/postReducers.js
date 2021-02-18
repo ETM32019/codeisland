@@ -9,6 +9,10 @@ import {
   POST_DETAILS_REQUEST,
   POST_DETAILS_SUCCESS,
   POST_DETAILS_FAIL,
+  POST_LIST_MY_FAIL,
+  POST_LIST_MY_REQUEST,
+  POST_LIST_MY_SUCCESS,
+  POST_LIST_MY_RESET,
 } from "../constants/postConstants";
 // List
 export const postListReducer = (state = { posts: [] }, action) => {
@@ -49,7 +53,23 @@ export const postCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case POST_CREATE_RESET:
       return {};
-      
+
+    default:
+      return state;
+  }
+};
+// Get User Posts
+export const postUserPostsReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case POST_LIST_MY_REQUEST:
+      return { loading: true };
+    case POST_LIST_MY_SUCCESS:
+      return { loading: false, posts: action.payload };
+    case POST_LIST_MY_FAIL:
+      return { loading: false, error: action.payload };
+    case POST_LIST_MY_RESET:
+      return { posts: [] };
+
     default:
       return state;
   }

@@ -8,6 +8,9 @@ import {
   POST_DETAILS_REQUEST,
   POST_DETAILS_SUCCESS,
   POST_DETAILS_FAIL,
+  POST_LIST_MY_SUCCESS,
+  POST_LIST_MY_FAIL,
+  POST_LIST_MY_REQUEST,
 } from "../constants/postConstants";
 import axios from "axios";
 
@@ -71,6 +74,33 @@ export const createNewPost = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: POST_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+// get posts by user
+export const getUserPosts = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: POST_LIST_MY_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Beaer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get("/api/posts", config);
+    dispatch({
+      type: POST_LIST_MY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_LIST_MY_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

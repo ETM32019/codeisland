@@ -3,8 +3,9 @@ import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserDetails } from "../actions/userActions";
+import { getUserPosts, createNewPost } from "../actions/postActions";
 
-const ProfileScreen = ({ match }) => {
+const ProfileScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const userId = match.params.id;
 
@@ -14,10 +15,28 @@ const ProfileScreen = ({ match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const postUserPosts = useSelector((state) => state.postUserPosts);
+  const { error: postsError, posts } = postUserPosts;
+
+  const postCreate = useSelector((state) => state.postCreate);
+  const {
+    loading: createLoading,
+    error: createError,
+    success: createSuccess,
+    post: createPost,
+  } = postCreate;
+
   useEffect(() => {
     dispatch(getUserDetails(userId));
-  }, [dispatch, userId]);
+    dispatch(getUserPosts());
+    if (createSuccess) {
+      history.push(`/post/${createPost._id}/edit`);
+    }
+  }, [dispatch, userId, history, createPost, createSuccess]);
 
+  const createPostHandler = () => {
+    dispatch(createNewPost());
+  };
   return (
     <>
       {loading ? (
@@ -139,16 +158,27 @@ const ProfileScreen = ({ match }) => {
                     )}
                   </section>
                   <section id="profile-recent-posts" className="pb-5">
-                    <h2 className="text-success">Recent Posts</h2>
+                    <div className="d-flex justify-content-between">
+                      <h2 className="text-success">Recent Posts</h2>
+                      <button
+                        className="btn btn-primary"
+                        onClick={createPostHandler}
+                      >
+                        Add Post
+                      </button>
+                    </div>
                     <hr className="bg-secondary" />
-                    {!user.post ? (
-                      <p className="text-muted">There are no posts</p>
-                    ) : user.post.length ? (
+                    {postsError && (
+                      <Message variant="danger">{postsError}</Message>
+                    )}
+                    {!posts ? (
                       <Loader />
+                    ) : posts.length === 0 ? (
+                      <p className="text-muted">There are no posts</p>
                     ) : (
                       <div className="row">
                         <div className="col-md-12">
-                          {user.posts.map((x, idx) => (
+                          {posts.map((x, idx) => (
                             <div key={idx}>
                               <div className="card mb-3">
                                 <div className="row no-gutters">
