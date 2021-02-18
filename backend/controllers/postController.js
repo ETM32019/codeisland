@@ -42,4 +42,12 @@ const getPostById = asyncHandler(async (req, res) => {
   }
 });
 
-export { postNewPost, getAllPosts, getPostById };
+//@desc     Get Users Posts
+//@route    GET /api/posts
+//@access   Public
+const getUsersPosts = asyncHandler(async (req, res) => {
+  const userPosts = await Post.find({ user: req.user._id });
+  res.json(userPosts);
+});
+
+export { postNewPost, getAllPosts, getPostById, getUsersPosts };
